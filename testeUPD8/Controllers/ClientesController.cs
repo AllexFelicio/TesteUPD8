@@ -19,9 +19,17 @@ namespace testeUPD8.Controllers
         }
 
         // GET: Clientes
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string id)
         {
-              return View(await _context.Clientes.ToListAsync());
+            var cliente = from m in _context.Clientes
+                         select m;
+
+            if (!String.IsNullOrEmpty(id))
+            {
+                cliente = cliente.Where(s => s.Name!.Contains(id));
+            }
+
+            return View(await cliente.ToListAsync());
         }
 
         // GET: Clientes/Details/5
@@ -53,7 +61,7 @@ namespace testeUPD8.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Nascimento,Cpf,Cidade,Estado")] Cliente cliente)
+        public async Task<IActionResult> Create([Bind("Id,Name,Nascimento,Cpf,Cidade,Estado,Endereco,Sexo")] Cliente cliente)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +93,7 @@ namespace testeUPD8.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Nascimento,Cpf,Cidade,Estado")] Cliente cliente)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Nascimento,Cpf,Cidade,Estado,Endereco,Sexo")] Cliente cliente)
         {
             if (id != cliente.Id)
             {

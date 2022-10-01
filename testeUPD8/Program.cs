@@ -1,4 +1,3 @@
-using Microsoft.EntityFrameworkCore;
 using testeUPD8.Models;
 
 var builder = WebApplication.CreateBuilder(args);

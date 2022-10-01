@@ -4,32 +4,99 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Consulta Cliente</h1>
+<h1 style="color:blue">Consulta Cliente</h1>
 
-<table class="table">
+<!--Filtro de pesquisa, está filtrando apenas por nome-->
+<form asp-action="Index">
+  <div class="row">
+      <div class="col">
+                <label class="control-label">CPF</label>
+                <input class="form-control" placeholder="123.456.789-0" />
+                <span  class="text-danger"></span>
+    </div>
+    <div class="col">
+                <label class="control-label">Nome</label>
+                <input type="text"  name="SearchString" class="form-control" placeholder="Fulano da Silva" />
+                <span class="text-danger"></span>
+
+    </div>
+    <div style="margin-right:30px" class="col">
+                <label class="control-label">Data de Nascimento</label>
+                <input  class="form-control" type="date" />
+                <span  class="text-danger"></span>
+
+    </div>
+    <div class="col">
+                <input style="margin-top:35px" class="form-check-input" type="checkbox" />
+                <label style="margin-top:30px" class="form-check-label">Masculino</label>               
+                <input style="margin-top:35px" class="form-check-input" type="checkbox" />
+                <label style="margin-top:30px" class="form-check-label">Feminino</label>
+  
+                <span  class="text-danger"></span>
+ </div>
+ 
+    <div class="row">
+        <div class="col-6">
+            <label class="control-label">Endereço</label>
+                <input  class="form-control" placeholder="Rua são paulo, 345"/>
+                <span  class="text-danger"></span>
+            </div>
+      <div class="col-3">       
+                <label  class="control-label">Estado</label>
+                <input  class="form-control" placeholder="SP"/>
+                <span  class="text-danger"></span>
+    </div>
+    <div class="col-3">
+                <label  class="control-label">Cidade</label>
+                <input class="form-control" placeholder="Sorocaba" />
+                <span class="text-danger"></span>
+    </div>
+    </div>
+  </div>
+  <div class="d-flex flex-row-reverse">
+    <div class="p-2"><button class="btn btn-secondary" style="margin:20px 10px 10px 0px"><a class="text-decoration-none" style="color:white" asp-action="">Limpar</a></button></div>
+     <div class="p-2"><input style="margin-top:20px" type="submit"  value="Pesquisar" class="btn btn-primary" /></div>
+</div>
+</form>
+
+
+
+<table class="table table-bordered">
+    <caption>Lista de clientes</caption>
     <thead>
         <tr>
-            <th>
+            <th style="text-align:center">Opções</th>
+            <th style="text-align:center">
                 @Html.DisplayNameFor(model => model.Name)
             </th>
-            <th>
+            <th style="text-align:center">
                 @Html.DisplayNameFor(model => model.Nascimento)
             </th>
-            <th>
+            <th style="text-align:center">
                 @Html.DisplayNameFor(model => model.Cpf)
             </th>
-            <th>
+            <th style="text-align:center">
                 @Html.DisplayNameFor(model => model.Cidade)
             </th>
-            <th>
+            <th style="text-align:center">
                 @Html.DisplayNameFor(model => model.Estado)
             </th>
-            <th></th>
+            <th style="text-align:center">
+                @Html.DisplayNameFor(model => model.Endereco)
+            </th>
+            <th style="text-align:center">
+                @Html.DisplayNameFor(model => model.Sexo)
+            </th>
+           
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
+            <td>
+                <button type="button" class="btn btn-success" style="margin: 7px"><a class="text-decoration-none" style="color:white" asp-action="Edit" asp-route-id="@item.Id">Editar</a></button>|
+                <button type="button" class="btn btn-danger"><a class="text-decoration-none" style="color:white" asp-action="Delete" asp-route-id="@item.Id">Excluir</a></button>
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
@@ -46,16 +113,18 @@
                 @Html.DisplayFor(modelItem => item.Estado)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                @Html.DisplayFor(modelItem => item.Endereco)
             </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sexo)
+            </td>
+            
         </tr>
 }
     </tbody>
 </table>
 
 <p>
-    <button><a asp-action="Create">Pesquisar</a></button>
+    
 </p>
 

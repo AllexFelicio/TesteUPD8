@@ -10,5 +10,7 @@ namespace testeUPD8.Models
         public string Cpf { get; set; }
         public string Cidade { get; set; }
         public string Estado { get; set; }
+        public string Endereco { get; set; }    
+        public string Sexo { get; set; }
     }
 }
