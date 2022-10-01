@@ -1,0 +1,4 @@
+Foi gerado o banco de dados no console de gerenciador de pacotes do Visual Studio atraves dos comandos:
+Add-Migration -Context Context 
+Update-datase -Context Context
+
